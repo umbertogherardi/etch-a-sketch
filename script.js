@@ -1,4 +1,4 @@
-let dimDivs = 16;
+let dimDivs = 32;
 
 const grid = document.querySelector('.grid');
 
@@ -15,7 +15,7 @@ pixelBtn.addEventListener('click', () => {
             dimDivs = newDimDivs;
         }
     }
-    
+
     removeGrid();
     createGrid(dimDivs);
 });
