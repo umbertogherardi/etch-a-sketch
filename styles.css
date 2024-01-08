@@ -1,4 +1,51 @@
-.grid-container {
+* {
+    font-family: Helvetica, sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin: 0 0 10px 0;
+    padding: 0;
+    color: rgb(255, 202, 68);
+    font-family: "Pacifico", serif;
+    font-weight: 400;
+}
+
+span {
+    font-style: italic;
+    font-size: medium;
+    padding: 0 15px;
+}
+
+.etch-a-sketch, .button-container {
     display: flex;
     justify-content: center;
+    margin: 40px;
+}
+
+.grid-container {
+    background-color: red;
+    padding: 10px 70px 70px 70px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(126, 126, 126);
+}
+
+.button-container {
+    margin: 20px 0;
+}
+
+button {
+    background-color: gray;
+    border: 4px solid gray;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: large;
+    color: white;
+}
+
+button:hover {
+    background-color: white;
+    border: 4px solid gray;;
+    cursor: pointer;
+    color: gray;
 }
