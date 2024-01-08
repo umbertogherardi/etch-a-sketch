@@ -1,30 +1,46 @@
+let dimDivs = 16;
+
 const grid = document.querySelector('.grid');
 
-const dimBtn = document.querySelector('button');
-dimBtn.addEventListener('click', () => {
-    let dimDivs = prompt("Enter the width/length for the grid: ");
+const pixelBtn = document.querySelector('.pixel-btn');
+pixelBtn.addEventListener('click', () => {
+    let newDimDivs = prompt("Enter the number of pixels for the sides (1 - 100)");
 
-
-    document.removeChild(grid);
+    if (newDimDivs) {
+        if (newDimDivs < 1) {
+            dimDivs = 1;
+        } else if (newDimDivs > 100) {
+            dimDivs = 100;
+        } else {
+            dimDivs = newDimDivs;
+        }
+    }
+    
+    removeGrid();
+    createGrid(dimDivs);
 });
 
-function removeGrid(dimDivs) {
-    for (let i = 0; i < dimDivs; i++) {
-        curRow = document.querySelector(".grid div");
-        console.log(curRow.target);
-        
-        gridRow.setAttribute('style', 'display: flex;')
-        
-        for (let j = 0; j < dimDivs; j++) {
-            let gridCell = document.createElement('div');
-        }
-    }   
+const clearBtn = document.querySelector('.clear-btn');
+clearBtn.addEventListener('click', () => {
+    removeGrid();
+    createGrid(dimDivs);
+});
+
+function removeGrid() {
+    let rows = document.querySelectorAll(".grid > div");
+    rows.forEach(row => {
+        console.log(row);
+        let cells = row.querySelectorAll("div");
+        cells.forEach(cell => {
+            row.removeChild(cell);
+        })
+        grid.removeChild(row);
+    })
 }
 
 function createGrid(dimDivs) {
     const DIM_PIXELS = 480;
     const cellDim = DIM_PIXELS / dimDivs;
-    console.log(cellDim)
 
     for (let i = 0; i < dimDivs; i++) {
         let gridRow = document.createElement('div');
@@ -49,4 +65,4 @@ function createGrid(dimDivs) {
     grid.setAttribute('style', `border: 4px solid darkred; width: ${DIM_PIXELS}px;`)
 }
 
-createGrid(32);
+createGrid(dimDivs);
