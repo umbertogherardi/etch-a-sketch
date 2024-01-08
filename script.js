@@ -1,19 +1,31 @@
-const gridContainer = document.querySelector('.grid-container');
+const grid = document.querySelector('.grid');
 
-function createGrid() {
-    const SIDE_LENGTH = 16;
+function createGrid(dimDivs) {
+    const DIM_PIXELS = 480;
+    const cellDim = DIM_PIXELS / dimDivs;
+    console.log(cellDim)
 
-    for (let i = 0; i < SIDE_LENGTH; i++) {
+    for (let i = 0; i < dimDivs; i++) {
         let gridRow = document.createElement('div');
-        gridRow.setAttribute('style', 'display: flex; justify-content: center;')
         
-        for (let j = 0; j < SIDE_LENGTH; j++) {
+        gridRow.setAttribute('style', 'display: flex;')
+        
+        for (let j = 0; j < dimDivs; j++) {
             let gridCell = document.createElement('div');
-            gridCell.setAttribute('style', 'border: 2px solid blue; height: 30px; width: 30px;')
+            
+            gridCell.setAttribute('style', `height: ${cellDim}px; width: ${cellDim}px;`)
+
+            gridCell.addEventListener('mouseover', function(e) {
+                console.log(e.target);
+                e.target.setAttribute('style', `background-color: red; height: ${cellDim}px; width: ${cellDim}px;`)
+            })
+
             gridRow.appendChild(gridCell);
         }
-        gridContainer.appendChild(gridRow);
+        grid.appendChild(gridRow);
     }
+
+    grid.setAttribute('style', `border: 2px solid black;width: ${DIM_PIXELS}px;`)
 }
 
-createGrid();
+createGrid(32);
