@@ -2,6 +2,7 @@
     font-family: Helvetica, sans-serif;
 }
 
+/* etch-a-sketch styles */
 .header {
     text-align: center;
     margin: 0 0 10px 0;
@@ -17,10 +18,10 @@ span {
     padding: 0 15px;
 }
 
-.etch-a-sketch, .button-container {
+.etch-a-sketch {
     display: flex;
     justify-content: center;
-    margin: 40px;
+    margin: 80px;
 }
 
 .grid-container {
@@ -34,9 +35,14 @@ span {
     transition: background-color 0.10s linear;
 }
 
-.button-container {
-    margin: 20px 0;
-    gap: 20px;
+/* option bar styles */
+.options {
+    text-align: center;
+    margin: 0 50px 20px 0;
+    background-color: lightgray;
+    padding: 5px 20px 5px 20px;
+    border-radius: 10px;
+    max-width: 100px;
 }
 
 button {
@@ -45,12 +51,20 @@ button {
     padding: 10px;
     border-radius: 5px;
     font-size: large;
-    color: white;
+    color: lightgray;
+    margin: 20px auto;
+    display: block;
+}
+
+.selected-btn {
+    background-color: lightgray;
+    border: 4px solid gray;
+    color: gray;
 }
 
 button:hover {
-    background-color: white;
-    border: 4px solid gray;;
+    background-color: lightgray;
+    border: 4px solid gray;
     cursor: pointer;
     color: gray;
 }

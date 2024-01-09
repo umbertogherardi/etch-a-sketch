@@ -1,8 +1,18 @@
 let dimDivs = 32;
 
+const sketchBtns = document.querySelectorAll('.sketch-btns button');
+
+sketchBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        setSketchType(btn.textContent);
+    })
+})
+
 const grid = document.querySelector('.grid');
 
 const pixelBtn = document.querySelector('.pixel-btn');
+const clearBtn = document.querySelector('.clear-btn');
+
 pixelBtn.addEventListener('click', () => {
     let newDimDivs = prompt("Enter the number of pixels for the sides (1 - 100)");
 
@@ -16,20 +26,35 @@ pixelBtn.addEventListener('click', () => {
         }
     }
 
+    let selectedBtn = document.querySelector('.selected-btn').textContent;
+
     removeGrid();
-    createGrid(dimDivs);
+    createGrid(dimDivs, selectedBtn);
 });
 
-const clearBtn = document.querySelector('.clear-btn');
 clearBtn.addEventListener('click', () => {
+    let selectedBtn = document.querySelector('.selected-btn').textContent;
+
     removeGrid();
-    createGrid(dimDivs);
+    createGrid(dimDivs, selectedBtn);
 });
+
+function setSketchType(selectedBtn) {
+    sketchBtns.forEach(btn => {
+        if (btn.textContent === selectedBtn) {
+            btn.classList.add('selected-btn');
+        } else {
+            btn.classList.remove('selected-btn');
+        }
+    });
+
+    removeGrid();
+    createGrid(dimDivs, selectedBtn);
+}
 
 function removeGrid() {
     let rows = document.querySelectorAll(".grid > div");
     rows.forEach(row => {
-        console.log(row);
         let cells = row.querySelectorAll("div");
         cells.forEach(cell => {
             row.removeChild(cell);
@@ -38,7 +63,7 @@ function removeGrid() {
     })
 }
 
-function createGrid(dimDivs) {
+function createGrid(dimDivs, sketchType) {
     const DIM_PIXELS = 480;
     const cellDim = DIM_PIXELS / dimDivs;
 
@@ -53,8 +78,18 @@ function createGrid(dimDivs) {
             gridCell.setAttribute('style', `height: ${cellDim}px; width: ${cellDim}px; background-color: lightgray;`)
 
             gridCell.addEventListener('mouseover', function(e) {
-                console.log(e.target);
-                e.target.setAttribute('style', `background-color: gray; height: ${cellDim}px; width: ${cellDim}px;`)
+                let cellColor = 'gray';
+
+                switch(sketchType) {
+                    case 'Rainbow':
+                        cellColor = randomColor();
+                        break;
+                    case 'Gradient':
+                        break;
+                }
+
+
+                e.target.setAttribute('style', `background-color: ${cellColor}; height: ${cellDim}px; width: ${cellDim}px;`)
             })
 
             gridRow.appendChild(gridCell);
@@ -65,4 +100,12 @@ function createGrid(dimDivs) {
     grid.setAttribute('style', `border: 4px solid darkred; width: ${DIM_PIXELS}px;`)
 }
 
-createGrid(dimDivs);
+function randomColor() {
+    let red = Math.random() * 255;
+    let green = Math.random() * 255;
+    let blue = Math.random() * 255;
+    return `rgb(${red}, ${green}, ${blue})`;
+}
+
+// set defaults
+setSketchType(document.querySelector('.classic').textContent);
