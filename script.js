@@ -9,7 +9,6 @@ sketchBtns.forEach(btn => {
 })
 
 const grid = document.querySelector('.grid');
-
 const pixelBtn = document.querySelector('.pixel-btn');
 const clearBtn = document.querySelector('.clear-btn');
 
@@ -83,8 +82,7 @@ function createGrid(dimDivs, sketchType) {
             let green = 128;
             let blue = 128;
 
-            gridCell.addEventListener('mouseover', event => {
-                                      
+            gridCell.addEventListener('mouseover', event => {                  
                 let cellColor = '';
 
                 switch(sketchType) {
